@@ -1,6 +1,10 @@
 package ca.college.lasalle;
-
-public class controller {
+/**
+ * Ayrton Amaral - 202234145
+ * Bruno Landeiro - 202234156
+ * Carolina Ruiz - 202234358
+ * */
+public class Controller {
 	
 	public static void mainScreen() {
 		Menu menu = new Menu();

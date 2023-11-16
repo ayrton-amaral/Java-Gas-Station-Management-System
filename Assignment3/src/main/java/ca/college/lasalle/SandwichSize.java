@@ -1,5 +1,9 @@
 package ca.college.lasalle;
-
+/**
+ * Ayrton Amaral - 202234145
+ * Bruno Landeiro - 202234156
+ * Carolina Ruiz - 202234358
+ * */
 public enum SandwichSize {
     SMALL(1, "Small"),
     MEDIUM(2, "Medium"),

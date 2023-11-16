@@ -1,5 +1,9 @@
 package ca.college.lasalle;
-
+/**
+ * Ayrton Amaral - 202234145
+ * Bruno Landeiro - 202234156
+ * Carolina Ruiz - 202234358
+ * */
 public enum SandwichMainIgredient {
     CHICKEN(1, "Chicken"),
     MEAT(2, "Meat"),
