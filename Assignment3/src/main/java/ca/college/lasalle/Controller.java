@@ -1,5 +1,7 @@
 package ca.college.lasalle;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -43,8 +45,11 @@ public class Controller {
 	        	//Display all sandwiches 
 	        	break;
 	        case 8:
-	        	// Compare two sandwiches and display which one is cheaper 
-	        	break;
+	        	// Compare two sandwiches and display which one is cheaper
+				Sandwich one = new Sandwich("One", new BigDecimal(10), 100, LocalDate.now(), SandwichSize.LARGE, SandwichMainIgredient.CHICKEN);
+				Sandwich two = new Sandwich("Two", new BigDecimal(15), 100, LocalDate.now(), SandwichSize.LARGE, SandwichMainIgredient.MEAT);
+				compareTwoSandwiches(one, two);
+				break;
 	        case 9:
 	        	//Sell an edible item 
 	        	break;
@@ -64,8 +69,6 @@ public class Controller {
         
 	}//end of mainScreen method
 
-
-
 	private static void displayAllChocolateBars() {
 		System.out.println("Chocolate Bars:");
 		//Using polymorphism to sisplay all Chocolate Bars
@@ -73,6 +76,19 @@ public class Controller {
 			if(product instanceof ChocolateBar){
 				System.out.println(product.toString());
 			}
+		}
+	}
+
+	private static void compareTwoSandwiches(Sandwich sandwichOne, Sandwich sandwichTwo) {
+		int result = sandwichOne.compareTo(sandwichTwo);
+		if(result == 0) {
+			System.out.println("Both sandwichs have the same price");
+		}
+		else if(result < 0) {
+			System.out.println(String.format("%s \n is cheaper then \n%s", sandwichOne, sandwichTwo));
+		}
+		else if(result > 0) {
+			System.out.println(String.format("%s is cheaper then \n%s", sandwichTwo, sandwichOne));
 		}
 	}
 }
