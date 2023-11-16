@@ -1,10 +1,15 @@
 package ca.college.lasalle;
+
+import java.util.List;
+
 /**
  * Ayrton Amaral - 202234145
  * Bruno Landeiro - 202234156
  * Carolina Ruiz - 202234358
  * */
 public class Controller {
+
+	public static List<Product> products = DataProvider.initialProducts();
 	
 	public static void mainScreen() {
 		Menu menu = new Menu();
@@ -28,7 +33,8 @@ public class Controller {
 	        	// Add coffee 
 	        	break;
 	        case 5:
-	        	//Display all chocolate bars 
+	        	//Display all chocolate bars
+				displayAllChocolateBars();
 	        	break;
 	        case 6:
 	        	//Compare two chocolate bars and display which one is healthier
@@ -58,4 +64,15 @@ public class Controller {
         
 	}//end of mainScreen method
 
+
+
+	private static void displayAllChocolateBars() {
+		System.out.println("Chocolate Bars:");
+		//Using polymorphism to sisplay all Chocolate Bars
+		for(Product product : products) {
+			if(product instanceof ChocolateBar){
+				System.out.println(product.toString());
+			}
+		}
+	}
 }

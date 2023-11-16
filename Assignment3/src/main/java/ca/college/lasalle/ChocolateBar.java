@@ -27,8 +27,9 @@ public class ChocolateBar extends Product implements Edible {
 
     @Override
     public String toString() {
-        return "ChocolateBar{" +
-                "numberOfCalories=" + numberOfCalories +
+        return "ChocolateBar { " +
+                "name=" + getName() +
+                ", numberOfCalories=" + numberOfCalories +
                 ", expiryDate=" + expiryDate +
                 '}';
     }
