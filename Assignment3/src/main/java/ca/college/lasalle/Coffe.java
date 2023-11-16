@@ -1,5 +1,6 @@
 package ca.college.lasalle;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 /**
  * Ayrton Amaral - 202234145
@@ -9,8 +10,8 @@ import java.time.LocalDate;
 public class Coffe extends Product implements Edible {
     private double numberOfCalories;
     private LocalDate expiryDate;
-    protected Coffe(String name, double numberOfCalories, LocalDate expiryDate) {
-        super(name);
+    protected Coffe(String name, BigDecimal price, double numberOfCalories, LocalDate expiryDate) {
+        super(name,price);
         this.numberOfCalories = numberOfCalories;
         this.expiryDate = expiryDate;
     }

@@ -1,5 +1,6 @@
 package ca.college.lasalle;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 /**
  * Ayrton Amaral - 202234145
@@ -11,8 +12,8 @@ public class Sandwich extends Product implements Edible {
     private LocalDate expiryDate;
     private SandwichSize size;
     private SandwichMainIgredient mainIgredient;
-    protected Sandwich(String name, double numberOfCalories, LocalDate expiryDate, SandwichSize size, SandwichMainIgredient mainIgredient) {
-        super(name);
+    protected Sandwich(String name, BigDecimal price, double numberOfCalories, LocalDate expiryDate, SandwichSize size, SandwichMainIgredient mainIgredient) {
+        super(name, price);
         this.numberOfCalories = numberOfCalories;
         this.expiryDate = expiryDate;
         this.size = size;

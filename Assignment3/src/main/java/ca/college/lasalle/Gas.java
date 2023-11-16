@@ -1,4 +1,7 @@
 package ca.college.lasalle;
+
+import java.math.BigDecimal;
+
 /**
  * Ayrton Amaral - 202234145
  * Bruno Landeiro - 202234156
@@ -6,8 +9,8 @@ package ca.college.lasalle;
  * */
 public class Gas extends Product{
     private double amountInTheTanks;
-    public Gas(String name, double amountInTheTanks) {
-        super(name);
+    public Gas(String name, BigDecimal price, double amountInTheTanks) {
+        super(name, price);
         this.amountInTheTanks = amountInTheTanks;
     }
 

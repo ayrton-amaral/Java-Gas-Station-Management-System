@@ -1,5 +1,6 @@
 package ca.college.lasalle;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 /**
  * Ayrton Amaral - 202234145
@@ -9,8 +10,8 @@ import java.time.LocalDate;
 public class ChocolateBar extends Product implements Edible {
     private double numberOfCalories;
     private LocalDate expiryDate;
-    protected ChocolateBar(String name, double numberOfCalories, LocalDate expiryDate) {
-        super(name);
+    protected ChocolateBar(String name, BigDecimal price, double numberOfCalories, LocalDate expiryDate) {
+        super(name, price);
         this.numberOfCalories = numberOfCalories;
         this.expiryDate = expiryDate;
     }
@@ -28,9 +29,10 @@ public class ChocolateBar extends Product implements Edible {
     @Override
     public String toString() {
         return "ChocolateBar { " +
-                "name=" + getName() +
-                ", numberOfCalories=" + numberOfCalories +
-                ", expiryDate=" + expiryDate +
+                "name = " + getName() +
+                ", price = $ " + getPrice() +
+                ", numberOfCalories = " + numberOfCalories +
+                ", expiryDate = " + expiryDate +
                 '}';
     }
 }
