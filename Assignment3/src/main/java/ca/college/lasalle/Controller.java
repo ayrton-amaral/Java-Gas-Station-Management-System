@@ -81,6 +81,7 @@ public class Controller {
 
 				case 10:
 					//Sell gas
+					// Every time gas is sold, your software has to adjust the amount of gas we have in tanks.
 					break;
 
 				case 11:
@@ -90,7 +91,6 @@ public class Controller {
 
 				case 12:
 					displayGasInTanks();
-
 					break;
 			}//end of switch case
 	        
