@@ -46,11 +46,17 @@ public class Controller {
 					break;
 
 				case 6:
-					//Compare two chocolate bars and display which one is healthier
-					ChocolateBar chocolateBar1 = new ChocolateBar("Chocolate 1", new BigDecimal(1.75), 333, LocalDate.now());
-					ChocolateBar chocolateBar2 = new ChocolateBar("Chocolate 2", new BigDecimal(1.85), 150, LocalDate.now());
-					compareTwoChocolates(chocolateBar1, chocolateBar2);
-
+					// Compare two chocolate bars and display which one is healthier
+					System.out.println("\nAvailable Chocolate Bars:");
+					for(Product product : products)	{
+						if(product instanceof ChocolateBar){
+							System.out.println(product);
+						}
+					}
+					System.out.println("\nWhich sandwiches would you like to compare?");
+					ChocolateBar chocolate1 = findChocolate("Enter the first chocolate id: ");
+					ChocolateBar chocolate2 = findChocolate("Enter the second chocolate id: ");
+					compareTwoChocolates(chocolate1, chocolate2);
 					break;
 
 				case 7:
@@ -59,14 +65,15 @@ public class Controller {
 
 				case 8:
 					// Compare two sandwiches and display which one is cheaper
-					System.out.println("Available Sandwichs:");
+					System.out.println("Available Sandwiches:");
 					for(Product product : products) {
 						if(product instanceof Sandwich){
 							System.out.println(product.toString());
 						}
 					}
-					Sandwich sandwichOne = readSandwichFromConsole("Select the first Sandwich to compare (Enter with the id).");
-					Sandwich sandwichTwo = readSandwichFromConsole("Select the second Sandwich to compare (Enter with the id).");
+					System.out.println("Which sandwiches would you like to compare?");
+					Sandwich sandwichOne = readSandwichFromConsole("Enter the first sandwich id: ");
+					Sandwich sandwichTwo = readSandwichFromConsole("Enter the second sandwich id: ");
 					compareTwoSandwiches(sandwichOne, sandwichTwo);
 					break;
 
@@ -122,20 +129,20 @@ public class Controller {
 			}catch (Exception exception) {
 				System.out.println(exception.getMessage());
 			}
-		} while ( sandwich == null);
+		} while (sandwich == null);
 		return sandwich;
 	}
 
 	private static int readIntegerFromConsole(String displayMessage)
 	{
 		Scanner scanner = new Scanner(System.in);
-		boolean isValid = false;
 		Integer i = null;
 		do {
 			System.out.println(displayMessage);
 			try {
 				i = scanner.nextInt();
 			} catch (Exception exception){
+				System.out.println("The input should be an integer number.");
 				scanner.next();
 			}
 		} while (i == null);
@@ -194,6 +201,22 @@ public class Controller {
 		else if(result > 0) {
 			System.out.println(String.format("%s \n is less healthier than \n%s", chocolate1, chocolate2));
 		}
+	}
+
+	private static ChocolateBar findChocolate (String displayMessage) {
+		ChocolateBar chocolate = null;
+		do {
+			int id = readIntegerFromConsole(displayMessage);
+			for(Product product : products) {
+				if(id == product.getId() && product instanceof ChocolateBar) {
+					chocolate = ((ChocolateBar) product);
+				}
+			}
+			if(chocolate == null) {
+				System.out.println("Chocolate id was not found.");
+			}
+		} while (chocolate == null);
+		return chocolate;
 	}
 
 }
