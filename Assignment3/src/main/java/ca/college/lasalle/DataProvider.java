@@ -7,8 +7,6 @@ import java.util.List;
 
 public class DataProvider {
 
-
-
     public static List<Product> initialProducts() {
         LocalDate expiryDate = LocalDate.now().plusYears(1);
         List<Product> productList = new ArrayList<>();

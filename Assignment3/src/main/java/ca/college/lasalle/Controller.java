@@ -31,16 +31,15 @@ public class Controller {
 				case 2:
 					// Add a sandwich
 					break;
+
 				case 3:
-					// Add gas
-
-
+					addGas();
 					break;
+
 				case 4:
 					// Add coffee
 					break;
 				case 5:
-					//Display all chocolate bars
 					displayAllChocolateBars();
 					break;
 				case 6:
@@ -80,6 +79,27 @@ public class Controller {
         
 	}//end of mainScreen method
 
+	private static void addGas(){
+		Scanner scanner = new Scanner(System.in);
+		double amountOfGas = 0;
+		do {
+			System.out.println("Enter gas amount to add: ");
+			try{
+				amountOfGas = scanner.nextDouble();
+				if(amountOfGas <= 0){
+					System.out.println("Gas amount should be a number greater than 0.");
+				}
+			}
+			catch (Exception e){
+				System.out.println("Gas amount should be a numerical value.");
+				scanner.next();
+			}
+		} while(amountOfGas <= 0);
+
+		// Casting the product of type Gas and adding
+		((Gas) products.get(0)).addGas(amountOfGas);
+		System.out.println("The gas amount was added successfully.");
+	}
 	private static Sandwich readSandwichFromConsole(String displayMessage) {
 		Sandwich sandwich = null;
 		do {
