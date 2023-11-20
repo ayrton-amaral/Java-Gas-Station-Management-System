@@ -7,7 +7,7 @@ package ca.college.lasalle;
 public enum SandwichMainIgredient {
     CHICKEN(1, "Chicken"),
     MEAT(2, "Meat"),
-    VEGIE(3, "Vegie");
+    VEGGIE(3, "Veggie");
     private int id;
     private String description;
     SandwichMainIgredient(int id, String description){
