@@ -49,6 +49,7 @@ public class Controller {
 	        	break;
 	        case 7:
 	        	//Carolina: Display all sandwiches 
+	        	displayAllSandwiches();
 	        	break;
 	        case 8:
 	        	// Compare two sandwiches and display which one is cheaper
@@ -174,10 +175,20 @@ public class Controller {
 	}//End of addCoffee()
 
 	private static void displayAllChocolateBars() {
-		System.out.println("Chocolate Bars:");
+		System.out.println("------- Chocolate Bars -------");
 		//Using polymorphism to display all Chocolate Bars
 		for(Product product : products) {
 			if(product instanceof ChocolateBar){
+				System.out.println(product.toString());
+			}
+		}
+	}
+	
+	private static void displayAllSandwiches() {
+		System.out.println("------ Sandwiches ------");
+		//Using polymorphism to display all Chocolate Bars
+		for(Product product : products) {
+			if(product instanceof Sandwich){
 				System.out.println(product.toString());
 			}
 		}
