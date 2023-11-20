@@ -15,6 +15,7 @@ public class Menu {
         } catch (Exception e){
             scanner.next();
         }
+        
     }
 
     public void displayMenu() {

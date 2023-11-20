@@ -3,6 +3,9 @@ package ca.college.lasalle;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Scanner;
+
+
 
 /**
  * Ayrton Amaral - 202234145
@@ -23,7 +26,8 @@ public class Controller {
 	        menu.selectOption();
 	        switch(menu.getSelectedOption()) {
 	        case 1:
-	        	//Add a chocolate bar 
+	        	//Carolina: Add a chocolate bar 
+	        	addChocolateBar();
 	        	break;
 	        case 2:
 	        	// Add a sandwich
@@ -32,7 +36,7 @@ public class Controller {
 	        	// Add gas 
 	        	break;
 	        case 4:
-	        	// Add coffee 
+	        	// Carolina: Add coffee 
 	        	break;
 	        case 5:
 	        	//Display all chocolate bars
@@ -42,7 +46,7 @@ public class Controller {
 	        	//Compare two chocolate bars and display which one is healthier
 	        	break;
 	        case 7:
-	        	//Display all sandwiches 
+	        	//Carolina: Display all sandwiches 
 	        	break;
 	        case 8:
 	        	// Compare two sandwiches and display which one is cheaper
@@ -54,7 +58,7 @@ public class Controller {
 	        	//Sell an edible item 
 	        	break;
 	        case 10:
-	        	//Sell gas 
+	        	//Carolina: Sell gas 
 	        	break;
 	        case 11:
 	        	// Sell coffee 
@@ -69,9 +73,57 @@ public class Controller {
         
 	}//end of mainScreen method
 
+	private static void addChocolateBar() {
+
+		String name;
+		BigDecimal price = BigDecimal.ZERO;
+		double numberOfCalories = 0; 
+		LocalDate expiryDate = null;
+		Scanner scanner = new Scanner(System.in);
+	    
+	    
+	    System.out.println("----------- ADD A CHOCOLATE BAR -------");
+	    
+	    //Get the name
+	    System.out.println("What is the name of the new chocolate bar?:");
+	    name = scanner.next();
+	    
+	    //Get the price
+	    System.out.println("What is it's price?:");
+	    try {
+	    	price = scanner.nextBigDecimal();
+	    }
+		catch(Exception e1) {
+			System.out.println("Please insert only a number");
+			System.out.println(e1);
+		}	
+	    
+	    //Get the number of calories
+	    System.out.print("\nWhat is the number of calories?:");
+	    try {
+	    	numberOfCalories = scanner.nextDouble();
+	    }
+		catch(Exception e1) {
+			System.out.println("Please insert only a number");
+			System.out.println(e1);
+		}
+	    //LocalDate expiryDate;
+	    System.out.print("What is the expiry date? (yyyy-MM-dd): ");
+	    try {
+	    	expiryDate = LocalDate.parse(scanner.next());
+	    }
+		catch(Exception e1) {
+			System.out.println("Please insert a valid date");
+			System.out.println(e1);
+		}
+	    products.add(new ChocolateBar(name, price, numberOfCalories,expiryDate));
+	    
+	    
+	}//End of addChocolateBar()
+	
 	private static void displayAllChocolateBars() {
 		System.out.println("Chocolate Bars:");
-		//Using polymorphism to sisplay all Chocolate Bars
+		//Using polymorphism to display all Chocolate Bars
 		for(Product product : products) {
 			if(product instanceof ChocolateBar){
 				System.out.println(product.toString());
