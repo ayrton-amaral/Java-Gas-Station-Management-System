@@ -14,6 +14,10 @@ public class Gas extends Product{
         this.amountInTheTanks = amountInTheTanks;
     }
 
+    public void addGas(double amount) {
+        amountInTheTanks += amount;
+    }
+
     public void sell(double amount){
         if(amount == 0) {
             throw new RuntimeException("Invalid amount required, has to be more than 0");
