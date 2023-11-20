@@ -29,7 +29,7 @@ public class Controller {
 
 	        switch(menu.getSelectedOption()) {
 				case 1:
-					//Add a chocolate bar
+					addChocolateBar();
 					break;
 
 				case 2:
@@ -41,7 +41,7 @@ public class Controller {
 					break;
 
 				case 4:
-					// Add coffee
+					addCoffee();
 					break;
 
 				case 5:
@@ -261,7 +261,7 @@ public class Controller {
 	
 	private static void displayAllSandwiches() {
 		System.out.println("------ Sandwiches ------");
-		//Using polymorphism to display all Chocolate Bars
+		//Using polymorphism to display all Sandwiches
 		for(Product product : products) {
 			if(product instanceof Sandwich){
 				System.out.println(product.toString());
