@@ -211,8 +211,13 @@ public class Controller {
 			System.out.println(e1);
 		}
 	    //add the new product
-	    products.add(new ChocolateBar(name, price, numberOfCalories,expiryDate));
-	    
+		try{
+			ChocolateBar chocolateBar = new ChocolateBar(name, price, numberOfCalories, expiryDate);
+			products.add(chocolateBar);
+		} catch (InvalidCalories e){
+			System.out.println(e.getMessage());
+		}
+
 	    
 	}//End of addChocolateBar()
 
