@@ -76,7 +76,7 @@ public class Controller {
 					break;
 
 				case 9:
-					//Sell an edible item
+					sellEdibleProduct();
 					break;
 
 				case 10:
@@ -85,14 +85,13 @@ public class Controller {
 					break;
 
 				case 11:
-					// Sell coffee
 					sellCoffee();
 					break;
 
 				case 12:
 					displayGasInTanks();
 					break;
-			}//end of switch case
+			}// end of switch case
 	        
 		}while(menu.getSelectedOption()!=13);
 	}//end of mainScreen method
@@ -115,6 +114,26 @@ public class Controller {
 				System.out.println("Coffee id was not found.");
 			}
 		} while (coffee == null);
+	}
+
+	private static void sellEdibleProduct() {
+		displayAllEdibleProducts();
+		System.out.println("Which product would you like to buy?");
+		Edible edible = null;
+		do {
+			int id = readIntegerFromConsole("Enter the id of the desired product: ");
+			for(Product product : products){
+				if(product instanceof Edible && product.getId() == id){
+					edible = (Edible) product;
+				}
+			}
+			if(edible != null){
+				System.out.println("You have purchased: ");
+				System.out.println(edible);
+			} else {
+				System.out.println("Product id was not found.");
+			}
+		} while (edible == null);
 	}
 
 	private static void addGas() {
@@ -290,6 +309,16 @@ public class Controller {
 		//Using polymorphism to display all Coffees
 		for(Product product : products) {
 			if(product instanceof Coffee){
+				System.out.println(product.toString());
+			}
+		}
+	}
+
+	private static void displayAllEdibleProducts() {
+		System.out.println("------ Edible Products ------");
+		//Using polymorphism to display all edibles
+		for(Product product : products) {
+			if(product instanceof Edible){
 				System.out.println(product.toString());
 			}
 		}
