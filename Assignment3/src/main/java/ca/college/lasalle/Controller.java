@@ -28,6 +28,7 @@ public class Controller {
 				case 1:
 					//Add a chocolate bar
 					break;
+
 				case 2:
 					// Add a sandwich
 					break;
@@ -39,15 +40,19 @@ public class Controller {
 				case 4:
 					// Add coffee
 					break;
+
 				case 5:
 					displayAllChocolateBars();
 					break;
+
 				case 6:
 					//Compare two chocolate bars and display which one is healthier
 					break;
+
 				case 7:
 					//Display all sandwiches
 					break;
+
 				case 8:
 					// Compare two sandwiches and display which one is cheaper
 					System.out.println("Available Sandwichs:");
@@ -60,26 +65,29 @@ public class Controller {
 					Sandwich sandwichTwo = readSandwichFromConsole("Select the second Sandwich to compare (Enter with the id).");
 					compareTwoSandwiches(sandwichOne, sandwichTwo);
 					break;
+
 				case 9:
 					//Sell an edible item
 					break;
+
 				case 10:
 					//Sell gas
 					break;
+
 				case 11:
 					// Sell coffee
 					break;
+
 				case 12:
-					// Display how much gas do we have in tanks
+					displayGasInTanks();
+
 					break;
-				}//end of switch case
+			}//end of switch case
 	        
 		}while(menu.getSelectedOption()!=13);
-    	
-        
 	}//end of mainScreen method
 
-	private static void addGas(){
+	private static void addGas() {
 		Scanner scanner = new Scanner(System.in);
 		double amountOfGas = 0;
 		do {
@@ -100,6 +108,7 @@ public class Controller {
 		((Gas) products.get(0)).addGas(amountOfGas);
 		System.out.println("The gas amount was added successfully.");
 	}
+
 	private static Sandwich readSandwichFromConsole(String displayMessage) {
 		Sandwich sandwich = null;
 		do {
@@ -163,4 +172,10 @@ public class Controller {
 		}
 		throw new RuntimeException("Sandwich not found.");
 	}
+
+	private static void displayGasInTanks() {
+		double amountInTheTanks = ((Gas) products.get(0)).getAmountInTheTanks();
+		System.out.println("The total amount of gas in the tanks is: " + amountInTheTanks + " liters.");
+	}
+
 }
