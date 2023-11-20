@@ -30,7 +30,9 @@ public class Coffee extends Product implements Edible {
     @Override
     public String toString() {
         return "Coffee{" +
-                "numberOfCalories=" + numberOfCalories +
+                " id=" + getId() +
+                ", name=" + getName() +
+                ", numberOfCalories=" + numberOfCalories +
                 ", expiryDate=" + expiryDate +
                 '}';
     }

@@ -85,6 +85,7 @@ public class Controller {
 
 				case 11:
 					// Sell coffee
+					sellCoffee();
 					break;
 
 				case 12:
@@ -95,6 +96,26 @@ public class Controller {
 	        
 		}while(menu.getSelectedOption()!=13);
 	}//end of mainScreen method
+
+	private static void sellCoffee() {
+		displayAllCoffees();
+		System.out.println("Which coffee would you like to buy?");
+		Coffee coffee = null;
+		do {
+			int id = readIntegerFromConsole("Enter the id of the desired coffee: ");
+			for(Product product : products){
+				if(product instanceof Coffee && product.getId() == id){
+					coffee = (Coffee) product;
+				}
+			}
+			if(coffee != null){
+				System.out.println("You have purchased the coffee: ");
+				System.out.println(coffee);
+			} else {
+				System.out.println("Coffee id was not found.");
+			}
+		} while (coffee == null);
+	}
 
 	private static void addGas() {
 		Scanner scanner = new Scanner(System.in);
@@ -259,6 +280,16 @@ public class Controller {
 		//Using polymorphism to display all Sandwiches
 		for(Product product : products) {
 			if(product instanceof Sandwich){
+				System.out.println(product.toString());
+			}
+		}
+	}
+
+	private static void displayAllCoffees() {
+		System.out.println("------ Coffees ------");
+		//Using polymorphism to display all Coffees
+		for(Product product : products) {
+			if(product instanceof Coffee){
 				System.out.println(product.toString());
 			}
 		}
