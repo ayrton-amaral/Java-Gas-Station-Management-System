@@ -47,6 +47,10 @@ public class Controller {
 
 				case 6:
 					//Compare two chocolate bars and display which one is healthier
+					ChocolateBar chocolateBar1 = new ChocolateBar("Chocolate 1", new BigDecimal(1.75), 333, LocalDate.now());
+					ChocolateBar chocolateBar2 = new ChocolateBar("Chocolate 2", new BigDecimal(1.85), 150, LocalDate.now());
+					compareTwoChocolates(chocolateBar1, chocolateBar2);
+
 					break;
 
 				case 7:
@@ -154,10 +158,10 @@ public class Controller {
 			System.out.println("Both sandwichs have the same price");
 		}
 		else if(result < 0) {
-			System.out.println(String.format("%s \n is cheaper then \n%s", sandwichOne, sandwichTwo));
+			System.out.println(String.format("%s \n is cheaper than \n%s", sandwichOne, sandwichTwo));
 		}
 		else if(result > 0) {
-			System.out.println(String.format("%s is cheaper then \n%s", sandwichTwo, sandwichOne));
+			System.out.println(String.format("%s \n is cheaper than \n%s", sandwichTwo, sandwichOne));
 		}
 	}
 
@@ -176,6 +180,20 @@ public class Controller {
 	private static void displayGasInTanks() {
 		double amountInTheTanks = ((Gas) products.get(0)).getAmountInTheTanks();
 		System.out.println("The total amount of gas in the tanks is: " + amountInTheTanks + " liters.");
+	}
+
+	private static void compareTwoChocolates(ChocolateBar chocolate1, ChocolateBar chocolate2) {
+		int result = chocolate1.getNumberOfCalories().compareTo(chocolate2.getNumberOfCalories());
+
+		if(result == 0) {
+			System.out.println("Both chocolates have the same number of calories.");
+		}
+		else if(result < 0) {
+			System.out.println(String.format("%s \n is healthier than \n%s", chocolate1, chocolate2));
+		}
+		else if(result > 0) {
+			System.out.println(String.format("%s \n is less healthier than \n%s", chocolate1, chocolate2));
+		}
 	}
 
 }

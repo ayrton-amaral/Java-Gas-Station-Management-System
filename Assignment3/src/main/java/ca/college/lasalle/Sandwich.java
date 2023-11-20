@@ -23,7 +23,7 @@ public class Sandwich extends Product implements Edible, Comparable<Sandwich> {
     }
 
     @Override
-    public double getNumberOfCalories() {
+    public Double getNumberOfCalories() {
         return this.numberOfCalories;
     }
 

@@ -8,7 +8,7 @@ import java.time.LocalDate;
  * Carolina Ruiz - 202234358
  * */
 public class Coffe extends Product implements Edible {
-    private double numberOfCalories;
+    private Double numberOfCalories;
     private LocalDate expiryDate;
     protected Coffe(String name, BigDecimal price, double numberOfCalories, LocalDate expiryDate) {
         super(name,price);
@@ -17,7 +17,7 @@ public class Coffe extends Product implements Edible {
     }
 
     @Override
-    public double getNumberOfCalories() {
+    public Double getNumberOfCalories() {
         return this.numberOfCalories;
     }
 

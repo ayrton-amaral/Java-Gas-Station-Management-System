@@ -7,6 +7,6 @@ import java.time.LocalDate;
  * Carolina Ruiz - 202234358
  * */
 public interface Edible {
-    double getNumberOfCalories();
+    Double getNumberOfCalories();
     LocalDate getExpiryDate();
 }
