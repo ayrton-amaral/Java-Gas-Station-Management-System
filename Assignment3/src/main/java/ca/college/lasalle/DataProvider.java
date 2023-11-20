@@ -19,7 +19,7 @@ public class DataProvider {
         productList.add(new Sandwich("Sandwich", new BigDecimal(5.64), 200, expiryDate, SandwichSize.MEDIUM, SandwichMainIgredient.CHICKEN));
         productList.add(new Sandwich("Sandwich", new BigDecimal(7.64), 300, expiryDate, SandwichSize.LARGE, SandwichMainIgredient.MEAT));
         //Coffe
-        productList.add(new Coffe("Tim Hortons", new BigDecimal(1.64), 10, expiryDate));
+        productList.add(new Coffee("Tim Hortons", new BigDecimal(1.64), 10, expiryDate));
 
         return productList;
     }
