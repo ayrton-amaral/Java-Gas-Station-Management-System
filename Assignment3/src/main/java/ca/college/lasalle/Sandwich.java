@@ -35,6 +35,7 @@ public class Sandwich extends Product implements Edible, Comparable<Sandwich> {
     @Override
     public String toString() {
         return "Sandwich{" +
+                " id=" + getId() +
                 " name=" + getName() +
                 ", price=$" + getPrice() +
                 ", numberOfCalories=" + numberOfCalories +

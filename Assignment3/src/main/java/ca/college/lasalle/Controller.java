@@ -3,6 +3,7 @@ package ca.college.lasalle;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Ayrton Amaral - 202234145
@@ -46,9 +47,15 @@ public class Controller {
 	        	break;
 	        case 8:
 	        	// Compare two sandwiches and display which one is cheaper
-				Sandwich one = new Sandwich("One", new BigDecimal(10), 100, LocalDate.now(), SandwichSize.LARGE, SandwichMainIgredient.CHICKEN);
-				Sandwich two = new Sandwich("Two", new BigDecimal(15), 100, LocalDate.now(), SandwichSize.LARGE, SandwichMainIgredient.MEAT);
-				compareTwoSandwiches(one, two);
+				System.out.println("Available Sandwichs:");
+				for(Product product : products) {
+					if(product instanceof Sandwich){
+						System.out.println(product.toString());
+					}
+				}
+				Sandwich sandwichOne = readSandwichFromConsole("Select the first Sandwich to compare (Enter with the id).");
+				Sandwich sandwichTwo = readSandwichFromConsole("Select the second Sandwich to compare (Enter with the id).");
+				compareTwoSandwiches(sandwichOne, sandwichTwo);
 				break;
 	        case 9:
 	        	//Sell an edible item 
@@ -68,6 +75,35 @@ public class Controller {
     	
         
 	}//end of mainScreen method
+
+	private static Sandwich readSandwichFromConsole(String displayMessage) {
+		Sandwich sandwich = null;
+		do {
+			int id = readIntegerFromConsole(displayMessage);
+			try {
+				sandwich = findSandwichById(id);
+			}catch (Exception exception) {
+				System.out.println(exception.getMessage());
+			}
+		} while ( sandwich == null);
+		return sandwich;
+	}
+
+	private static int readIntegerFromConsole(String displayMessage)
+	{
+		Scanner scanner = new Scanner(System.in);
+		boolean isValid = false;
+		Integer i = null;
+		do {
+			System.out.println(displayMessage);
+			try {
+				i = scanner.nextInt();
+			} catch (Exception exception){
+				scanner.next();
+			}
+		} while (i == null);
+		return i;
+	}
 
 	private static void displayAllChocolateBars() {
 		System.out.println("Chocolate Bars:");
@@ -90,5 +126,17 @@ public class Controller {
 		else if(result > 0) {
 			System.out.println(String.format("%s is cheaper then \n%s", sandwichTwo, sandwichOne));
 		}
+	}
+
+	private static Sandwich findSandwichById(int id) throws RuntimeException
+	{
+		for(Product product : products)
+		{
+			if(product instanceof Sandwich && product.getId().equals(id))
+			{
+				return (Sandwich) product;
+			}
+		}
+		throw new RuntimeException("Sandwich not found.");
 	}
 }

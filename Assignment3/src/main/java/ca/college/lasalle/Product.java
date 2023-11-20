@@ -10,11 +10,17 @@ import java.util.Objects;
  * Carolina Ruiz - 202234358
  * */
 public abstract class Product {
+    private static Integer count = 1;
+    private Integer id;
     private String name;
     private BigDecimal price;
     protected Product(String name, BigDecimal price){
+        this.id = count++;
         this.name = name;
         this.price = price;
+    }
+    public Integer getId() {
+        return this.id;
     }
     public String getName() {
         return this.name;
