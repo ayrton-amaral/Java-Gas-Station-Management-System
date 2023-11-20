@@ -33,7 +33,7 @@ public class Controller {
 					break;
 
 				case 2:
-					// Add a sandwich
+					// Add a sandwich - Bruno
 					break;
 
 				case 3:
@@ -80,7 +80,7 @@ public class Controller {
 					break;
 
 				case 10:
-					//Sell gas
+					// Sell gas - Carolina
 					// Every time gas is sold, your software has to adjust the amount of gas we have in tanks.
 					break;
 
