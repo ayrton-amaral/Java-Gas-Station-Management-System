@@ -63,17 +63,12 @@ public class Controller {
 					break;
 
 				case 7:
-					//Display all sandwiches
+					displayAllSandwiches();
 					break;
 
 				case 8:
 					// Compare two sandwiches and display which one is cheaper
-					System.out.println("Available Sandwiches:");
-					for(Product product : products) {
-						if(product instanceof Sandwich){
-							System.out.println(product.toString());
-						}
-					}
+					displayAllSandwiches();
 					System.out.println("Which sandwiches would you like to compare?");
 					Sandwich sandwichOne = readSandwichFromConsole("Enter the first sandwich id: ");
 					Sandwich sandwichTwo = readSandwichFromConsole("Enter the second sandwich id: ");
