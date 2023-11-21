@@ -36,8 +36,6 @@ public class Gas extends Product {
 
     @Override
     public String toString() {
-        return "Gas{" +
-                "amountInTheTanks=" + amountInTheTanks +
-                '}';
+        return "Gas{" + "amountInTheTanks=" + amountInTheTanks + " price: $" + this.getPrice()+'}';
     }
 }
