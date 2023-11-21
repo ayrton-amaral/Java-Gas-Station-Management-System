@@ -81,6 +81,7 @@ public class Controller {
 
 				case 10:
 					// Sell gas - Carolina
+					sellGas();
 					// Every time gas is sold, your software has to adjust the amount of gas we have in tanks.
 					break;
 
@@ -95,7 +96,30 @@ public class Controller {
 	        
 		}while(menu.getSelectedOption()!=13);
 	}//end of mainScreen method
-
+	
+	private static void sellGas() {
+//		
+		System.out.println("----------- SELL GAS -------");
+	    System.out.println("how many litres you need?:");
+	    double gasLitres = 0;
+	    
+	    try {
+	    	gasLitres = scanner.nextDouble();
+	    }
+		catch(Exception e1) {
+			System.out.println("Please insert only a number");
+			System.out.println(e1);
+		}
+	    
+	    Gas gas = (Gas) products.get(0);
+	    try {
+		    gas.sell(gasLitres);
+	    }
+	    catch(Exception e) {
+	    	System.out.println(e);	    
+	    }
+		
+	}//end of sellGas()
 	private static void sellCoffee() {
 		displayAllCoffees();
 		System.out.println("Which coffee would you like to buy?");
@@ -192,9 +216,7 @@ public class Controller {
 		BigDecimal price = BigDecimal.ZERO;
 		double numberOfCalories = 0; 
 		LocalDate expiryDate = null;
-		//Scanner scanner = new Scanner(System.in);
-	    
-	    
+		
 	    System.out.println("----------- ADD A CHOCOLATE BAR -------");
 	    
 	    //Get the name
