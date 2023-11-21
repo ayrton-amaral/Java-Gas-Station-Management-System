@@ -1,10 +1,12 @@
 package ca.college.lasalle;
 import java.util.Scanner;
+
 /**
  * Ayrton Amaral - 202234145
  * Bruno Landeiro - 202234156
  * Carolina Ruiz - 202234358
  * */
+
 public class Menu {
 	private int selectedOption = 0;
 

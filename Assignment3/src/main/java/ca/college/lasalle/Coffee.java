@@ -7,8 +7,8 @@ import java.time.LocalDate;
  * Bruno Landeiro - 202234156
  * Carolina Ruiz - 202234358
  * */
-public class Coffee extends Product implements Edible {
 
+public class Coffee extends Product implements Edible {
     private Double numberOfCalories;
     private LocalDate expiryDate;
     protected Coffee(String name, BigDecimal price, double numberOfCalories, LocalDate expiryDate) {

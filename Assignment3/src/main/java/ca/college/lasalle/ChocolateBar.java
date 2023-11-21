@@ -7,6 +7,7 @@ import java.time.LocalDate;
  * Bruno Landeiro - 202234156
  * Carolina Ruiz - 202234358
  * */
+
 public class ChocolateBar extends Product implements Edible {
     private Double numberOfCalories;
     private LocalDate expiryDate;

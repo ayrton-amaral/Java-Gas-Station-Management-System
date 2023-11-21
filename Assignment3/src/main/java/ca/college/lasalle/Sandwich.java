@@ -9,11 +9,13 @@ import java.util.Objects;
  * Bruno Landeiro - 202234156
  * Carolina Ruiz - 202234358
  * */
+
 public class Sandwich extends Product implements Edible, Comparable<Sandwich> {
     private double numberOfCalories;
     private LocalDate expiryDate;
     private SandwichSize size;
     private SandwichMainIgredient mainIgredient;
+
     protected Sandwich(String name, BigDecimal price, double numberOfCalories, LocalDate expiryDate, SandwichSize size, SandwichMainIgredient mainIgredient) {
         super(name, price);
         this.numberOfCalories = numberOfCalories;
