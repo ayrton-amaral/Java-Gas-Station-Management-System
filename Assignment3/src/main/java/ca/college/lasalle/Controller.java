@@ -5,13 +5,12 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
-
-
 /**
  * Ayrton Amaral - 202234145
  * Bruno Landeiro - 202234156
  * Carolina Ruiz - 202234358
  * */
+
 public class Controller {
 	static Scanner scanner = new Scanner(System.in);
     
@@ -93,12 +92,11 @@ public class Controller {
 					displayGasInTanks();
 					break;
 			}// end of switch case
-	        
 		}while(menu.getSelectedOption()!=13);
 	}//end of mainScreen method
 	
 	private static void sellGas() {
-//		
+
 		System.out.println("----------- SELL GAS -------");
 	    System.out.println("how many litres you need?:");
 	    double gasLitres = 0;
@@ -120,6 +118,7 @@ public class Controller {
 	    }
 		
 	}//end of sellGas()
+
 	private static void sellCoffee() {
 		displayAllCoffees();
 		System.out.println("Which coffee would you like to buy?");
@@ -210,6 +209,7 @@ public class Controller {
 		} while (i == null);
 		return i;
 	}
+
 	private static void addChocolateBar() {
 
 		String name;
@@ -242,6 +242,7 @@ public class Controller {
 			System.out.println("Please insert only a number");
 			System.out.println(e1);
 		}
+
 	    //get the expiry Date;
 	    System.out.print("What is the expiry date? (yyyy-MM-dd): ");
 	    try {
@@ -251,6 +252,7 @@ public class Controller {
 			System.out.println("Please insert a valid date");
 			System.out.println(e1);
 		}
+
 	    //add the new product
 		try{
 			ChocolateBar chocolateBar = new ChocolateBar(name, price, numberOfCalories, expiryDate);
@@ -258,13 +260,11 @@ public class Controller {
 		} catch (InvalidCalories e){
 			System.out.println(e.getMessage());
 		}
-
-	    
 	}//End of addChocolateBar()
 
 	private static void addCoffee() {
 		//Coffee(String name, BigDecimal price, double numberOfCalories, LocalDate expiryDate) {
-        
+
 		String name;
 		BigDecimal price = BigDecimal.ZERO;
 		double numberOfCalories = 0; 
@@ -296,6 +296,7 @@ public class Controller {
 			System.out.println("Please insert only a number");
 			System.out.println(e1);
 		}
+
 	    //get the expiry Date;
 	    System.out.print("What is the expiry date? (yyyy-MM-dd): ");
 	    try {
@@ -305,10 +306,9 @@ public class Controller {
 			System.out.println("Please insert a valid date");
 			System.out.println(e1);
 		}
+
 	    //add the new product
 	    products.add(new Coffee(name, price, numberOfCalories,expiryDate));
-	    
-	    
 	}//End of addCoffee()
 
 	private static void displayAllChocolateBars() {
@@ -354,7 +354,7 @@ public class Controller {
 	private static void compareTwoSandwiches(Sandwich sandwichOne, Sandwich sandwichTwo) {
 		int result = sandwichOne.compareTo(sandwichTwo);
 		if(result == 0) {
-			System.out.println("Both sandwichs have the same price");
+			System.out.println("Both sandwiches have the same price");
 		}
 		else if(result < 0) {
 			System.out.println(String.format("%s \n is cheaper than \n%s", sandwichOne, sandwichTwo));
