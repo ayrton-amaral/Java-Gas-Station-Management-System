@@ -12,7 +12,6 @@ import java.util.Scanner;
 
 public class Controller {
 	static Scanner scanner = new Scanner(System.in);
-
 	
 	public static void mainScreen() {
 		Menu menu = new Menu();
@@ -82,16 +81,16 @@ public class Controller {
 				case 12:
 					DataProvider.displayGasInTanks();
 					break;
-			}// end of switch case
+			} // end of switch case
 		}while(menu.getSelectedOption()!=13);
-	}//end of mainScreen method
+	} //end of mainScreen method
 
 	private static void addEdibleProduct(ProductType productType) {
 		Product product = null;
 		do {
-			System.out.println("----------- ADD "+ productType.getDescription() +" -------");
+			System.out.println("----------- ADD " + productType.getDescription() + " -----------");
 			String name = ConsoleReader.readAsString("What is the name of the new product?");
-			BigDecimal price = ConsoleReader.readAsBigDecimal("What is it's price?");
+			BigDecimal price = ConsoleReader.readAsBigDecimal("What is its price?");
 			double numberOfCalories = ConsoleReader.readAsDouble("What is the number of calories?");
 			LocalDate expiryDate = ConsoleReader.readAsLocalDate("What is the expiry date? (yyyy-MM-dd): ");
 
@@ -140,7 +139,7 @@ public class Controller {
 	}
 
 	public static void sellEdibleProduct() {
-		System.out.println("----------- SELL Edible Product -------");
+		System.out.println("----------- SELL Edible Product -----------");
 		DataProvider.displayAllEdibleProducts();
 		System.out.println();
 		System.out.println("Which product would you like to buy?");
@@ -162,7 +161,7 @@ public class Controller {
 	}
 
 	public static void sellProduct(ProductType type) {
-		System.out.println("----------- SELL Product -------");
+		System.out.println("----------- SELL Product -----------");
 		DataProvider.displayAllBy(type);
 		System.out.println();
 		Product product = chooseAProduct("Which product would you like to buy?", type);
@@ -171,8 +170,8 @@ public class Controller {
 	}
 
 	public static void sellGas() {
-		System.out.println("----------- SELL GAS -------");
-		double gasLitres = ConsoleReader.readAsDouble("how many litres you need?:");
+		System.out.println("----------- SELL GAS -----------");
+		double gasLitres = ConsoleReader.readAsDouble("How many liters you need?:");
 		Gas gas = (Gas) DataProvider.products.get(0);
 		try {
 			gas.sell(gasLitres);
@@ -230,6 +229,4 @@ public class Controller {
 			System.out.println(String.format("%s \n is less healthier than \n%s", chocolate1, chocolate2));
 		}
 	}
-
-
 }

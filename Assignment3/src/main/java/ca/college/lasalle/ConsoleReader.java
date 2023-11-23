@@ -17,6 +17,7 @@ public class ConsoleReader {
         } while (value == null || value.isEmpty());
         return value;
     }
+
     public static int readAsInteger(String displayMessage)
     {
         Integer value = null;
@@ -46,6 +47,7 @@ public class ConsoleReader {
         } while (value == null);
         return value;
     }
+
     public static BigDecimal readAsBigDecimal(String displayMessage)
     {
         BigDecimal value = null;
@@ -60,6 +62,7 @@ public class ConsoleReader {
         } while (value == null);
         return value;
     }
+
     public static LocalDate readAsLocalDate(String displayMessage)
     {
         LocalDate value = null;
@@ -74,5 +77,4 @@ public class ConsoleReader {
         } while (value == null);
         return value;
     }
-
 }

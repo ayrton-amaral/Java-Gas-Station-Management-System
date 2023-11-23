@@ -13,6 +13,7 @@ public enum ProductType {
     SANDWICH("Sandwiches");
 
     private String description;
+
     ProductType(String description){
         this.description = description;
     }
