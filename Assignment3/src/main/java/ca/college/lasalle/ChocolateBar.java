@@ -13,7 +13,7 @@ public class ChocolateBar extends Product implements Edible {
     private LocalDate expiryDate;
 
     public ChocolateBar(String name, BigDecimal price, double numberOfCalories, LocalDate expiryDate) {
-        super(name, price);
+        super(name, price, ProductType.CHOCOLATE_BAR);
         if(numberOfCalories < 0 || numberOfCalories > 3000){
             throw new InvalidCalories("The number of calories must be between 0 and 3000.");
         }

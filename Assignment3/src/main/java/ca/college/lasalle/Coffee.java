@@ -12,7 +12,10 @@ public class Coffee extends Product implements Edible {
     private Double numberOfCalories;
     private LocalDate expiryDate;
     protected Coffee(String name, BigDecimal price, double numberOfCalories, LocalDate expiryDate) {
-        super(name,price);
+        super(name,price,ProductType.COFFEE);
+        if(numberOfCalories < 0 || numberOfCalories > 3000){
+            throw new InvalidCalories("The number of calories must be between 0 and 3000.");
+        }
         this.numberOfCalories = numberOfCalories;
         this.expiryDate = expiryDate;
     }

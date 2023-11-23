@@ -12,7 +12,7 @@ public class Gas extends Product {
     private double amountInTheTanks;
 
     public Gas(String name, BigDecimal price, double amountInTheTanks) {
-        super(name, price);
+        super(name, price,ProductType.GAS);
         this.amountInTheTanks = amountInTheTanks;
     }
 

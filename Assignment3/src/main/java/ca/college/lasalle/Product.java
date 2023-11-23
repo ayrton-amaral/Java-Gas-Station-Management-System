@@ -15,11 +15,13 @@ public abstract class Product {
     private Integer id;
     private String name;
     private BigDecimal price;
+    private ProductType type;
 
-    protected Product(String name, BigDecimal price){
+    protected Product(String name, BigDecimal price, ProductType type){
         this.id = count++;
         this.name = name;
         this.price = price;
+        this.type = type;
     }
 
     public Integer getId() {
@@ -35,5 +37,9 @@ public abstract class Product {
             return price.setScale(2, RoundingMode.HALF_EVEN);
 
         return BigDecimal.ZERO;
+    }
+
+    public ProductType getType(){
+        return this.type;
     }
 }

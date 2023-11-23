@@ -1,5 +1,7 @@
 package ca.college.lasalle;
 
+import java.util.Arrays;
+
 /**
  * Ayrton Amaral - 202234145
  * Bruno Landeiro - 202234156
@@ -7,9 +9,9 @@ package ca.college.lasalle;
  * */
 
 public enum SandwichSize {
-    SMALL(1, "Small"),
-    MEDIUM(2, "Medium"),
-    LARGE(3, "Large");
+    SMALL(0, "Small"),
+    MEDIUM(1, "Medium"),
+    LARGE(2, "Large");
     private int id;
     private String description;
     SandwichSize(int id, String description){
@@ -31,5 +33,15 @@ public enum SandwichSize {
                 "id=" + id +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    public static SandwichSize findBy(int id){
+        return SandwichSize.values()[id];
+    }
+
+    public static void displayAll(){
+        for(SandwichSize size : SandwichSize.values()){
+            System.out.println(size);
+        }
     }
 }

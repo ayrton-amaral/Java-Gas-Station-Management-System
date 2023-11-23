@@ -2,7 +2,6 @@ package ca.college.lasalle;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -13,8 +12,7 @@ import java.util.Scanner;
 
 public class Controller {
 	static Scanner scanner = new Scanner(System.in);
-    
-	public static List<Product> products = DataProvider.initialProducts();
+
 	
 	public static void mainScreen() {
 		Menu menu = new Menu();
@@ -28,11 +26,11 @@ public class Controller {
 
 	        switch(menu.getSelectedOption()) {
 				case 1:
-					addChocolateBar();
+					addEdibleProduct(ProductType.CHOCOLATE_BAR);
 					break;
 
 				case 2:
-					// Add a sandwich - Bruno
+					addEdibleProduct(ProductType.SANDWICH);
 					break;
 
 				case 3:
@@ -40,37 +38,32 @@ public class Controller {
 					break;
 
 				case 4:
-					addCoffee();
+					addEdibleProduct(ProductType.COFFEE);
 					break;
 
 				case 5:
-					displayAllChocolateBars();
+					DataProvider.displayAllBy(ProductType.CHOCOLATE_BAR);
 					break;
 
 				case 6:
 					// Compare two chocolate bars and display which one is healthier
-					System.out.println("\nAvailable Chocolate Bars:");
-					for(Product product : products)	{
-						if(product instanceof ChocolateBar){
-							System.out.println(product);
-						}
-					}
-					System.out.println("\nWhich sandwiches would you like to compare?");
-					ChocolateBar chocolate1 = findChocolate("Enter the first chocolate id: ");
-					ChocolateBar chocolate2 = findChocolate("Enter the second chocolate id: ");
+					DataProvider.displayAllBy(ProductType.CHOCOLATE_BAR);
+					System.out.println("\nWhich chocolates would you like to compare?");
+					ChocolateBar chocolate1 = (ChocolateBar) chooseAProduct("Enter the first chocolate id: ", ProductType.CHOCOLATE_BAR);
+					ChocolateBar chocolate2 = (ChocolateBar) chooseAProduct("Enter the second chocolate id: ", ProductType.CHOCOLATE_BAR);
 					compareTwoChocolates(chocolate1, chocolate2);
 					break;
 
 				case 7:
-					displayAllSandwiches();
+					DataProvider.displayAllBy(ProductType.SANDWICH);
 					break;
 
 				case 8:
 					// Compare two sandwiches and display which one is cheaper
-					displayAllSandwiches();
+					DataProvider.displayAllBy(ProductType.SANDWICH);
 					System.out.println("Which sandwiches would you like to compare?");
-					Sandwich sandwichOne = readSandwichFromConsole("Enter the first sandwich id: ");
-					Sandwich sandwichTwo = readSandwichFromConsole("Enter the second sandwich id: ");
+					Sandwich sandwichOne = (Sandwich) chooseAProduct("Enter the first sandwich id: ", ProductType.SANDWICH);
+					Sandwich sandwichTwo = (Sandwich) chooseAProduct("Enter the second sandwich id: ", ProductType.SANDWICH);
 					compareTwoSandwiches(sandwichOne, sandwichTwo);
 					break;
 
@@ -79,73 +72,82 @@ public class Controller {
 					break;
 
 				case 10:
-					// Sell gas - Carolina
 					sellGas();
-					// Every time gas is sold, your software has to adjust the amount of gas we have in tanks.
 					break;
 
 				case 11:
-					sellCoffee();
+					sellProduct(ProductType.COFFEE);
 					break;
 
 				case 12:
-					displayGasInTanks();
+					DataProvider.displayGasInTanks();
 					break;
 			}// end of switch case
 		}while(menu.getSelectedOption()!=13);
 	}//end of mainScreen method
-	
-	private static void sellGas() {
 
-		System.out.println("----------- SELL GAS -------");
-	    System.out.println("how many litres you need?:");
-	    double gasLitres = 0;
-	    
-	    try {
-	    	gasLitres = scanner.nextDouble();
-	    }
-		catch(Exception e1) {
-			System.out.println("Please insert only a number");
-			System.out.println(e1);
-		}
-	    
-	    Gas gas = (Gas) products.get(0);
-	    try {
-		    gas.sell(gasLitres);
-	    }
-	    catch(Exception e) {
-	    	System.out.println(e);	    
-	    }
-		
-	}//end of sellGas()
-
-	private static void sellCoffee() {
-		displayAllCoffees();
-		System.out.println("Which coffee would you like to buy?");
-		Coffee coffee = null;
+	private static void addEdibleProduct(ProductType productType) {
+		Product product = null;
 		do {
-			int id = readIntegerFromConsole("Enter the id of the desired coffee: ");
-			for(Product product : products){
-				if(product instanceof Coffee && product.getId() == id){
-					coffee = (Coffee) product;
+			System.out.println("----------- ADD "+ productType.getDescription() +" -------");
+			String name = ConsoleReader.readAsString("What is the name of the new product?");
+			BigDecimal price = ConsoleReader.readAsBigDecimal("What is it's price?");
+			double numberOfCalories = ConsoleReader.readAsDouble("What is the number of calories?");
+			LocalDate expiryDate = ConsoleReader.readAsLocalDate("What is the expiry date? (yyyy-MM-dd): ");
+
+			try {
+				if(productType.equals(ProductType.SANDWICH)){
+					SandwichSize size = chooseASandwichSize();
+					SandwichMainIgredient mainIgredient = chooseASandwichMainIgredient();
+					product = new Sandwich(name, price, numberOfCalories, expiryDate, size, mainIgredient);
 				}
+				if(productType.equals(ProductType.CHOCOLATE_BAR)){
+					product = new ChocolateBar(name, price, numberOfCalories, expiryDate);
+				}
+				if(productType.equals(ProductType.COFFEE)){
+					product = new Coffee(name, price, numberOfCalories, expiryDate);
+				}
+			} catch (InvalidCalories exception){
+				System.out.println(exception.getMessage());
 			}
-			if(coffee != null){
-				System.out.println("You have purchased the coffee: ");
-				System.out.println(coffee);
-			} else {
-				System.out.println("Coffee id was not found.");
+			if(product != null){
+				DataProvider.products.add(product);
+				System.out.println("Product added successfully");
 			}
-		} while (coffee == null);
+		} while (product == null);
 	}
 
-	private static void sellEdibleProduct() {
-		displayAllEdibleProducts();
+	public static SandwichSize chooseASandwichSize(){
+		SandwichSize.displayAll();
+		return SandwichSize.findBy(ConsoleReader.readAsInteger("Choose a size:"));
+	}
+	public static SandwichMainIgredient chooseASandwichMainIgredient(){
+		SandwichMainIgredient.displayAll();
+		return SandwichMainIgredient.findBy(ConsoleReader.readAsInteger("Choose a main ingredient:"));
+	}
+
+	public static Product chooseAProduct(String displayMessage, ProductType type) {
+		Product product = null;
+		do {
+			int id = ConsoleReader.readAsInteger(displayMessage);
+			try {
+				product = DataProvider.findProductBy(id, type);
+			}catch (Exception exception) {
+				System.out.println(exception.getMessage());
+			}
+		} while (product == null);
+		return product;
+	}
+
+	public static void sellEdibleProduct() {
+		System.out.println("----------- SELL Edible Product -------");
+		DataProvider.displayAllEdibleProducts();
+		System.out.println();
 		System.out.println("Which product would you like to buy?");
 		Edible edible = null;
 		do {
-			int id = readIntegerFromConsole("Enter the id of the desired product: ");
-			for(Product product : products){
+			int id = ConsoleReader.readAsInteger("Enter the id of the desired product: ");
+			for(Product product : DataProvider.products){
 				if(product instanceof Edible && product.getId() == id){
 					edible = (Edible) product;
 				}
@@ -157,6 +159,27 @@ public class Controller {
 				System.out.println("Product id was not found.");
 			}
 		} while (edible == null);
+	}
+
+	public static void sellProduct(ProductType type) {
+		System.out.println("----------- SELL Product -------");
+		DataProvider.displayAllBy(type);
+		System.out.println();
+		Product product = chooseAProduct("Which product would you like to buy?", type);
+		System.out.println("You have purchased the product: ");
+		System.out.println(product);
+	}
+
+	public static void sellGas() {
+		System.out.println("----------- SELL GAS -------");
+		double gasLitres = ConsoleReader.readAsDouble("how many litres you need?:");
+		Gas gas = (Gas) DataProvider.products.get(0);
+		try {
+			gas.sell(gasLitres);
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
 	}
 
 	private static void addGas() {
@@ -177,178 +200,8 @@ public class Controller {
 		} while(amountOfGas <= 0);
 
 		// Casting the product of type Gas and adding
-		((Gas) products.get(0)).addGas(amountOfGas);
+		((Gas) DataProvider.products.get(0)).addGas(amountOfGas);
 		System.out.println("The gas amount was added successfully.");
-	}
-
-	private static Sandwich readSandwichFromConsole(String displayMessage) {
-		Sandwich sandwich = null;
-		do {
-			int id = readIntegerFromConsole(displayMessage);
-			try {
-				sandwich = findSandwichById(id);
-			}catch (Exception exception) {
-				System.out.println(exception.getMessage());
-			}
-		} while (sandwich == null);
-		return sandwich;
-	}
-
-	private static int readIntegerFromConsole(String displayMessage)
-	{
-		Scanner scanner = new Scanner(System.in);
-		Integer i = null;
-		do {
-			System.out.println(displayMessage);
-			try {
-				i = scanner.nextInt();
-			} catch (Exception exception){
-				System.out.println("The input should be an integer number.");
-				scanner.next();
-			}
-		} while (i == null);
-		return i;
-	}
-
-	private static void addChocolateBar() {
-
-		String name;
-		BigDecimal price = BigDecimal.ZERO;
-		double numberOfCalories = 0; 
-		LocalDate expiryDate = null;
-		
-	    System.out.println("----------- ADD A CHOCOLATE BAR -------");
-	    
-	    //Get the name
-	    System.out.println("What is the name of the new chocolate bar?:");
-	    name = scanner.next();
-	    
-	    //Get the price
-	    System.out.println("What is it's price?:");
-	    try {
-	    	price = scanner.nextBigDecimal();
-	    }
-		catch(Exception e1) {
-			System.out.println("Please insert only a number");
-			System.out.println(e1);
-		}	
-	    
-	    //Get the number of calories
-	    System.out.print("\nWhat is the number of calories?:");
-	    try {
-	    	numberOfCalories = scanner.nextDouble();
-	    }
-		catch(Exception e1) {
-			System.out.println("Please insert only a number");
-			System.out.println(e1);
-		}
-
-	    //get the expiry Date;
-	    System.out.print("What is the expiry date? (yyyy-MM-dd): ");
-	    try {
-	    	expiryDate = LocalDate.parse(scanner.next());
-	    }
-		catch(Exception e1) {
-			System.out.println("Please insert a valid date");
-			System.out.println(e1);
-		}
-
-	    //add the new product
-		try{
-			ChocolateBar chocolateBar = new ChocolateBar(name, price, numberOfCalories, expiryDate);
-			products.add(chocolateBar);
-		} catch (InvalidCalories e){
-			System.out.println(e.getMessage());
-		}
-	}//End of addChocolateBar()
-
-	private static void addCoffee() {
-		//Coffee(String name, BigDecimal price, double numberOfCalories, LocalDate expiryDate) {
-
-		String name;
-		BigDecimal price = BigDecimal.ZERO;
-		double numberOfCalories = 0; 
-		LocalDate expiryDate = null;
-		
-		//Scanner scanner = new Scanner(System.in);
-	    System.out.println("----------- ADD A COFFEE -------");
-	    
-	    //Get the name
-	    System.out.println("What is the name of the new coffee?:");
-	    name = scanner.next();
-	    
-	    //Get the price
-	    System.out.println("What is it's price?:");
-	    try {
-	    	price = scanner.nextBigDecimal();
-	    }
-		catch(Exception e1) {
-			System.out.println("Please insert only a number");
-			System.out.println(e1);
-		}	
-	    
-	    //Get the number of calories
-	    System.out.print("\nWhat is the number of calories?:");
-	    try {
-	    	numberOfCalories = scanner.nextDouble();
-	    }
-		catch(Exception e1) {
-			System.out.println("Please insert only a number");
-			System.out.println(e1);
-		}
-
-	    //get the expiry Date;
-	    System.out.print("What is the expiry date? (yyyy-MM-dd): ");
-	    try {
-	    	expiryDate = LocalDate.parse(scanner.next());
-	    }
-		catch(Exception e1) {
-			System.out.println("Please insert a valid date");
-			System.out.println(e1);
-		}
-
-	    //add the new product
-	    products.add(new Coffee(name, price, numberOfCalories,expiryDate));
-	}//End of addCoffee()
-
-	private static void displayAllChocolateBars() {
-		System.out.println("------- Chocolate Bars -------");
-		//Using polymorphism to display all Chocolate Bars
-		for(Product product : products) {
-			if(product instanceof ChocolateBar){
-				System.out.println(product.toString());
-			}
-		}
-	}
-	
-	private static void displayAllSandwiches() {
-		System.out.println("------ Sandwiches ------");
-		//Using polymorphism to display all Sandwiches
-		for(Product product : products) {
-			if(product instanceof Sandwich){
-				System.out.println(product.toString());
-			}
-		}
-	}
-
-	private static void displayAllCoffees() {
-		System.out.println("------ Coffees ------");
-		//Using polymorphism to display all Coffees
-		for(Product product : products) {
-			if(product instanceof Coffee){
-				System.out.println(product.toString());
-			}
-		}
-	}
-
-	private static void displayAllEdibleProducts() {
-		System.out.println("------ Edible Products ------");
-		//Using polymorphism to display all edibles
-		for(Product product : products) {
-			if(product instanceof Edible){
-				System.out.println(product.toString());
-			}
-		}
 	}
 
 	private static void compareTwoSandwiches(Sandwich sandwichOne, Sandwich sandwichTwo) {
@@ -362,23 +215,6 @@ public class Controller {
 		else if(result > 0) {
 			System.out.println(String.format("%s \n is cheaper than \n%s", sandwichTwo, sandwichOne));
 		}
-	}
-
-	private static Sandwich findSandwichById(int id) throws RuntimeException
-	{
-		for(Product product : products)
-		{
-			if(product instanceof Sandwich && product.getId().equals(id))
-			{
-				return (Sandwich) product;
-			}
-		}
-		throw new RuntimeException("Sandwich not found.");
-	}
-
-	private static void displayGasInTanks() {
-		double amountInTheTanks = ((Gas) products.get(0)).getAmountInTheTanks();
-		System.out.println("The total amount of gas in the tanks is: " + amountInTheTanks + " liters.");
 	}
 
 	private static void compareTwoChocolates(ChocolateBar chocolate1, ChocolateBar chocolate2) {
@@ -395,20 +231,5 @@ public class Controller {
 		}
 	}
 
-	private static ChocolateBar findChocolate (String displayMessage) {
-		ChocolateBar chocolate = null;
-		do {
-			int id = readIntegerFromConsole(displayMessage);
-			for(Product product : products) {
-				if(id == product.getId() && product instanceof ChocolateBar) {
-					chocolate = ((ChocolateBar) product);
-				}
-			}
-			if(chocolate == null) {
-				System.out.println("Chocolate id was not found.");
-			}
-		} while (chocolate == null);
-		return chocolate;
-	}
 
 }

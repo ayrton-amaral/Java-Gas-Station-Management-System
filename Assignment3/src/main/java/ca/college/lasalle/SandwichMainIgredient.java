@@ -7,9 +7,9 @@ package ca.college.lasalle;
  * */
 
 public enum SandwichMainIgredient {
-    CHICKEN(1, "Chicken"),
-    MEAT(2, "Meat"),
-    VEGGIE(3, "Veggie");
+    CHICKEN(0, "Chicken"),
+    MEAT(1, "Meat"),
+    VEGGIE(2, "Veggie");
 
     private int id;
     private String description;
@@ -33,5 +33,15 @@ public enum SandwichMainIgredient {
                 "id=" + id +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    public static SandwichMainIgredient findBy(int id){
+        return SandwichMainIgredient.values()[id];
+    }
+
+    public static void displayAll(){
+        for(SandwichMainIgredient size : SandwichMainIgredient.values()){
+            System.out.println(size);
+        }
     }
 }
