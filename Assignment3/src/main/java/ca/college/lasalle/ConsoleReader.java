@@ -6,10 +6,9 @@ import java.util.Scanner;
 
 public class ConsoleReader {
 
-    private static Scanner scanner = new Scanner(System.in);
-
     public static String readAsString(String displayMessage)
     {
+        Scanner scanner = new Scanner(System.in);
         String value = null;
         do {
             System.out.println(displayMessage);
@@ -20,6 +19,7 @@ public class ConsoleReader {
 
     public static int readAsInteger(String displayMessage)
     {
+        Scanner scanner = new Scanner(System.in);
         Integer value = null;
         do {
             System.out.println(displayMessage);
@@ -35,6 +35,7 @@ public class ConsoleReader {
 
     public static double readAsDouble(String displayMessage)
     {
+        Scanner scanner = new Scanner(System.in);
         Double value = null;
         do {
             System.out.println(displayMessage);
@@ -50,6 +51,7 @@ public class ConsoleReader {
 
     public static BigDecimal readAsBigDecimal(String displayMessage)
     {
+        Scanner scanner = new Scanner(System.in);
         BigDecimal value = null;
         do {
             System.out.println(displayMessage);
@@ -65,6 +67,7 @@ public class ConsoleReader {
 
     public static LocalDate readAsLocalDate(String displayMessage)
     {
+        Scanner scanner = new Scanner(System.in);
         LocalDate value = null;
         do {
             System.out.println(displayMessage);
@@ -72,7 +75,6 @@ public class ConsoleReader {
                 value = LocalDate.parse(scanner.next());
             } catch (Exception exception){
                 System.out.println("Please insert a valid date");
-                //scanner.next();
             }
         } while (value == null);
         return value;

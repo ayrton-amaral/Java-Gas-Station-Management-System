@@ -12,8 +12,10 @@ public enum SandwichSize {
     SMALL(0, "Small"),
     MEDIUM(1, "Medium"),
     LARGE(2, "Large");
+
     private int id;
     private String description;
+
     SandwichSize(int id, String description){
         this.id = id;
         this.description = description;

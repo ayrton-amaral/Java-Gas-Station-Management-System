@@ -11,16 +11,13 @@ import java.util.Scanner;
  * */
 
 public class Controller {
-	static Scanner scanner = new Scanner(System.in);
-	
+
 	public static void mainScreen() {
 		Menu menu = new Menu();
 		
 		do {
-			//Display the menu options
 	        menu.displayMenu();
 
-	        //Read selected option from the console
 	        menu.selectOption();
 
 	        switch(menu.getSelectedOption()) {
@@ -111,7 +108,7 @@ public class Controller {
 			}
 			if(product != null){
 				DataProvider.products.add(product);
-				System.out.println("Product added successfully");
+				System.out.println("Product added successfully.");
 			}
 		} while (product == null);
 	}
@@ -120,6 +117,7 @@ public class Controller {
 		SandwichSize.displayAll();
 		return SandwichSize.findBy(ConsoleReader.readAsInteger("Choose a size:"));
 	}
+
 	public static SandwichMainIgredient chooseASandwichMainIgredient(){
 		SandwichMainIgredient.displayAll();
 		return SandwichMainIgredient.findBy(ConsoleReader.readAsInteger("Choose a main ingredient:"));
@@ -131,7 +129,7 @@ public class Controller {
 			int id = ConsoleReader.readAsInteger(displayMessage);
 			try {
 				product = DataProvider.findProductBy(id, type);
-			}catch (Exception exception) {
+			} catch (Exception exception) {
 				System.out.println(exception.getMessage());
 			}
 		} while (product == null);
@@ -185,7 +183,7 @@ public class Controller {
 		Scanner scanner = new Scanner(System.in);
 		double amountOfGas = 0;
 		do {
-			System.out.println("Enter gas amount to add: ");
+			System.out.println("Enter gas amount to add:");
 			try{
 				amountOfGas = scanner.nextDouble();
 				if(amountOfGas <= 0){
@@ -206,7 +204,7 @@ public class Controller {
 	private static void compareTwoSandwiches(Sandwich sandwichOne, Sandwich sandwichTwo) {
 		int result = sandwichOne.compareTo(sandwichTwo);
 		if(result == 0) {
-			System.out.println("Both sandwiches have the same price");
+			System.out.println("Both sandwiches have the same price.");
 		}
 		else if(result < 0) {
 			System.out.println(String.format("%s \n is cheaper than \n%s", sandwichOne, sandwichTwo));
