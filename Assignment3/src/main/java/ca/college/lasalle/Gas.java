@@ -21,8 +21,8 @@ public class Gas extends Product {
     }
 
     public void sell(double amount){
-        if(amount == 0) {
-            throw new RuntimeException("Invalid amount required, has to be more than 0");
+        if(amount <= 0) {
+            throw new RuntimeException("Invalid amount required has to be greater than 0.");
         }
         if(amountInTheTanks < amount){
             throw new RuntimeException(String

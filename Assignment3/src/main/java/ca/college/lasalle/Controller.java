@@ -88,8 +88,8 @@ public class Controller {
 			System.out.println("----------- ADD " + productType.getDescription() + " -----------");
 			String name = ConsoleReader.readAsString("What is the name of the new product?");
 			BigDecimal price = ConsoleReader.readAsBigDecimal("What is its price?");
-			double numberOfCalories = ConsoleReader.readAsDouble("What is the number of calories?");
 			LocalDate expiryDate = ConsoleReader.readAsLocalDate("What is the expiry date? (yyyy-MM-dd): ");
+			double numberOfCalories = ConsoleReader.readAsDouble("What is the number of calories?");
 
 			try {
 				if(productType.equals(ProductType.SANDWICH)){
@@ -175,7 +175,7 @@ public class Controller {
 			gas.sell(gasLitres);
 		}
 		catch(Exception e) {
-			System.out.println(e);
+			System.out.println(e.getMessage());
 		}
 	}
 
