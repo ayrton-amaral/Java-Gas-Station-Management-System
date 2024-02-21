@@ -1,6 +1,7 @@
 # Gas Station Management System
 
 Project Overview
+
 This Java-based application serves as a comprehensive sales management system for a gas station and convenience store. 
 Developed as part of the 'Advanced Object-Oriented Programming' course at Collège LaSalle, the project integrates key concepts such as inheritance, polymorphism, interfaces, and exception handling.
 
