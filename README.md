@@ -6,8 +6,11 @@ This Java-based application serves as a comprehensive sales management system fo
 Developed as part of the 'Advanced Object-Oriented Programming' course at Collège LaSalle, the project integrates key concepts such as inheritance, polymorphism, interfaces, and exception handling.
 
 Contributors
+
 Ayrton Senna Seraphim do Amaral
+
 Bruno Lemos Landeiro
+
 Andrea Carolina Ruiz
 
 Introduction
